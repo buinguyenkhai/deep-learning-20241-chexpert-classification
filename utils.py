@@ -33,12 +33,12 @@ def get_weighted_random_sampler(data):
     sampler = WeightedRandomSampler(weights, len(weights), replacement=True)
     return sampler
 
-transforms = {
+transform = {
     'train': A.Compose([
-        A.Resize(224, 224),
         A.Affine(scale=(0.9, 1.1), p=0.5),
         A.OneOf([A.Affine(rotate=(-20, 20), p=0.5), A.Affine(shear=(-5, 5), p=0.5)], p=0.5),
         A.Affine(translate_percent=(-0.05, 0.05), p=0.5),
+        A.Resize(224, 224),
         A.Normalize([0.506, 0.506, 0.506], [0.287, 0.287, 0.287]),
         ToTensorV2()
     ]),

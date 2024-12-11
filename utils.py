@@ -13,7 +13,7 @@ class CheXpertDataset(Dataset):
         self.labels = torch.tensor(data.values)
         self.root_dir = root_dir
         self.img_paths = [os.path.join(root_dir, img_path) for img_path in data.index]
-        self.transform = transforms.get(mode)
+        self.transforms = transforms.get(mode)
     
     def __len__(self):
         return len(self.data)
@@ -23,8 +23,8 @@ class CheXpertDataset(Dataset):
         image = Image.open(img_path).convert('RGB')
         label = self.labels[idx]
 
-        if self.transform:
-            image = self.transform(image=np.array(image))['image']
+        if self.transforms:
+            image = self.transforms(image=np.array(image))['image']
 
         return (image, label)
     
@@ -39,12 +39,12 @@ transforms = {
         A.Affine(scale=(0.9, 1.1), p=0.5),
         A.OneOf([A.Affine(rotate=(-20, 20), p=0.5), A.Affine(shear=(-5, 5), p=0.5)], p=0.5),
         A.Affine(translate_percent=(-0.05, 0.05), p=0.5),
-        A.Normalize([0.506, 0.506, 0.506], [0.287, 0.287, 0.287]),
+        A.Normalize(mean[mode], std[mode]),
         ToTensorV2()
     ]),
     'val': A.Compose([
         A.Resize(224, 224),
-        A.Normalize([0.506, 0.506, 0.506], [0.287, 0.287, 0.287]),
+        A.Normalize(mean[mode], std[mode]),
         ToTensorV2()
     ]),
 }

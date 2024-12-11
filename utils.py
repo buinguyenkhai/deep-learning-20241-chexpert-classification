@@ -35,7 +35,7 @@ def get_weighted_random_sampler(data):
 
 transform = {
     'train': A.Compose([
-        A.Affine(scale=(0.9, 1.1), p=0.5),
+        A.Affine(scale=(0.95, 1.05), p=0.5),
         A.OneOf([A.Affine(rotate=(-20, 20), p=0.5), A.Affine(shear=(-5, 5), p=0.5)], p=0.5),
         A.Affine(translate_percent=(-0.05, 0.05), p=0.5),
         A.Resize(224, 224),

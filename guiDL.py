@@ -8,11 +8,40 @@ from PyQt5.QtCore import Qt
 import numpy as np
 import torch
 from torch import nn
-from torchvision import models
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 from PIL import Image
 import pandas as pd
+from torchvision.models import resnet101, densenet121
+
+def get_model_dict():
+    models = dict()
+
+    resnet_u0 = resnet101(num_classes=14)
+    resnet_u0.fc = torch.nn.Linear(in_features=resnet_u0.fc.in_features, out_features=14)
+    resnet_u0.load_state_dict(torch.load('checkpoint/ResNetTL-U0.pth', weights_only=True))
+
+    models['ResNetTL-U0'] = resnet_u0
+
+    resnet_u1 = resnet101(num_classes=14)
+    resnet_u1.fc = torch.nn.Linear(in_features=resnet_u1.fc.in_features, out_features=14)
+    resnet_u1.load_state_dict(torch.load('checkpoint/ResNetTL-U1.pth', weights_only=True))
+
+    models['ResNetTL-U1'] = resnet_u1
+
+    densenet_u0 = densenet121(num_classes=14)
+    densenet_u0.classifier = torch.nn.Linear(in_features=densenet_u0.classifier.in_features, out_features=14)
+    densenet_u0.load_state_dict(torch.load('checkpoint/DenseNetTL-U0.pth', weights_only=True))
+
+    models['DenseNetTL-U0'] = densenet_u0
+
+    densenet_u1 = densenet121(num_classes=14)
+    densenet_u1.classifier = torch.nn.Linear(in_features=densenet_u1.classifier.in_features, out_features=14)
+    densenet_u1.load_state_dict(torch.load('checkpoint/DenseNetTL-U1.pth', weights_only=True))
+
+    models['DenseNetTL-U1'] = densenet_u1
+
+    return models
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -149,6 +178,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(container)
 
         self.image_path = None  # store the uploaded image path
+        self.model_dict = get_model_dict()
 
     def upload_image(self):
         """Open a file dialog to upload an image and display it."""
@@ -225,9 +255,7 @@ class MainWindow(QMainWindow):
         thresholds = pd.read_csv(f'checkpoint/{selected_model}.csv')['threshold']
 
         # load model
-        model = models.resnet101(num_classes=14)
-        model.fc = nn.Linear(in_features=model.fc.in_features, out_features=14)
-        model.load_state_dict(torch.load(f'checkpoint/{selected_model}.pth', map_location='cpu', weights_only=True))
+        model = self.model_dict[selected_model]
         model.eval()
         
         # get predicted labels

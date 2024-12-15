@@ -19,25 +19,25 @@ def get_model_dict():
 
     resnet_u0 = resnet101(num_classes=14)
     resnet_u0.fc = torch.nn.Linear(in_features=resnet_u0.fc.in_features, out_features=14)
-    resnet_u0.load_state_dict(torch.load('checkpoint/ResNetTL-U0.pth', weights_only=True))
+    resnet_u0.load_state_dict(torch.load('checkpoint/ResNetTL-U0.pth', weights_only=True, map_location='cpu'))
 
     models['ResNetTL-U0'] = resnet_u0
 
     resnet_u1 = resnet101(num_classes=14)
     resnet_u1.fc = torch.nn.Linear(in_features=resnet_u1.fc.in_features, out_features=14)
-    resnet_u1.load_state_dict(torch.load('checkpoint/ResNetTL-U1.pth', weights_only=True))
+    resnet_u1.load_state_dict(torch.load('checkpoint/ResNetTL-U1.pth', weights_only=True, map_location='cpu'))
 
     models['ResNetTL-U1'] = resnet_u1
 
     densenet_u0 = densenet121(num_classes=14)
     densenet_u0.classifier = torch.nn.Linear(in_features=densenet_u0.classifier.in_features, out_features=14)
-    densenet_u0.load_state_dict(torch.load('checkpoint/DenseNetTL-U0.pth', weights_only=True))
+    densenet_u0.load_state_dict(torch.load('checkpoint/DenseNetTL-U0.pth', weights_only=True, map_location='cpu'))
 
     models['DenseNetTL-U0'] = densenet_u0
 
     densenet_u1 = densenet121(num_classes=14)
     densenet_u1.classifier = torch.nn.Linear(in_features=densenet_u1.classifier.in_features, out_features=14)
-    densenet_u1.load_state_dict(torch.load('checkpoint/DenseNetTL-U1.pth', weights_only=True))
+    densenet_u1.load_state_dict(torch.load('checkpoint/DenseNetTL-U1.pth', weights_only=True, map_location='cpu'))
 
     models['DenseNetTL-U1'] = densenet_u1
 

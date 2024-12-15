@@ -212,9 +212,9 @@ class MainWindow(QMainWindow):
 
         # load image for  model
         img_path = self.image_path
+        print(img_path)
         image = Image.open(img_path).convert('RGB')
         image = transforms(image=np.array(image))['image']
-
         # select a model
         selected_model = self.model_combo_box.currentText()
         if selected_model == 'None':
@@ -238,7 +238,7 @@ class MainWindow(QMainWindow):
             msg.setStandardButtons(QMessageBox.Ok)
             msg.exec_()
             return
-        image_index = 'chexpert' + self.image_path.split('chexpert', 1)[-1]
+        image_index = 'chexpert' + self.image_path.split('/chexpert', 1)[-1]
         try:
             image_label = labels.loc[image_index]
         except KeyError:

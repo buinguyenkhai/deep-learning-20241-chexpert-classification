@@ -1,3 +1,5 @@
+No Finding
+
 Enlarged Cardiomediastinum: Trung thất tim mở rộng (Trung tâm ngực)
 
 Cardiomegaly: Phì đại tim (Buồng tìm)
@@ -21,3 +23,5 @@ Pleural Effusion: Tràn dịch màng phổi (Giữa phổi và thành ngực)
 Pleural Other: Các bất thường màng phổi khác (Cả hai bên)
 
 Fracture: Gãy xương (sườn, lồng ngực)
+
+Support Devices

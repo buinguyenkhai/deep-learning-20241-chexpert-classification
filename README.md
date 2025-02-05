@@ -1,5 +1,5 @@
 # CHEST X-RAY DISEASES CLASSIFICATION
-[Dataset link](https://www.kaggle.com/datasets/ashery/chexpert). Please rename the archive folder to chexpert.
+[CheXpert Dataset](https://www.kaggle.com/datasets/ashery/chexpert). Please rename the archive folder to chexpert.
 
 [Model checkpoint link](https://drive.google.com/drive/folders/1jxqVEDs67HrPaRtKtaOJvb3OpqdeHwG4?usp=sharing). Please put the checkpoint folder inside the root directory.
 

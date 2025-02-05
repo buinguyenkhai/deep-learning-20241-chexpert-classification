@@ -3,6 +3,7 @@
 
 [Model checkpoint link](https://drive.google.com/drive/folders/1jxqVEDs67HrPaRtKtaOJvb3OpqdeHwG4?usp=sharing). Please put the checkpoint folder inside the root directory.
 
+[Report](https://github.com/buinguyenkhai/deep-learning-20241-chexpert-classification/blob/main/dl_project_report.pdf)
 Example:
 
 
